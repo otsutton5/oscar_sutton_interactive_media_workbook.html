@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .home-page {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url("My_workbook/researchJournal/css/homepage_img_woscar.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+}
+      
+    .secret-music-trigger {
+  position: fixed;
+
+
+  bottom: 480px;
+  left: 160px;
+
+  width: 120px;
+  height: 120px;
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+  z-index: 30;
+}
+
+.scrolling-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 15px 0;
+      background-color: transparent;
+      border-bottom: 2px solid transparent;
+      font-family: "Century Gothic", Helvetica, Arial, sans-serif;
+}
+
+.scrolling-text {
+      display: inline-block;
+      padding-left: 0%;
+      font-size: 50px;
+      animation: scroll-text 60s linear infinite;
+    }
+
+    @keyframes scroll-text {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .image-button img {
+      width: 250px;
+      height: auto;
+      display: block;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .image-button img:hover {
+      transform: scale(1.08);
+    }
+
+    
+  </style>
+</head>
+
+<body class="home-page">
+
+ <div class="scrolling-banner">
+    <div class="scrolling-text">
+      WELCOME TO OSCAR SUTTON'S WORKBOOK ✦ WELCOME TO OSCAR SUTTON'S WORKBOOK ✦ WELCOME TO OSCAR SUTTON'S WORKBOOK ✦ WELCOME TO OSCAR SUTTON'S WORKBOOK ✦ WELCOME TO OSCAR SUTTON'S WORKBOOK ✦ WELCOME TO OSCAR SUTTON'S WORKBOOK ✦ WELCOME TO OSCAR SUTTON'S WORKBOOK ✦ WELCOME TO OSCAR SUTTON'S WORKBOOK ✦
+    </div>
+  </div>
+
+  <main class="button-container">
+
+    <a href="workbook_a_home.html" class="image-button">
+      <img src="My_workbook/researchJournal/css/smallTitle_a_trns.png">
+    </a>
+
+    <a href="workbook_b_home.html" class="image-button">
+      <img src="My_workbook/researchJournal/css/smallTitle_b_trns.png">
+    </a>
+
+  </main>
+
+  <audio id="backgroundMusic" loop>
+  <source src="My_workbook/researchJournal/css/sun.mp3" type="audio/mpeg">
+  </audio>
+  <button class="secret-music-trigger" onclick="playMusic()" aria-label="Play music"></button>
+
+</body>
+
+<script>
+  const music = document.getElementById("backgroundMusic");
+
+  function playMusic() {
+    if (music.paused) {
+      music.play();
+    } else {
+      music.pause();
+    }
+  }
+</script>
+</html>

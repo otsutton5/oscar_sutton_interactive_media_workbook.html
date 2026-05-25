@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    /* remove default browser spacing */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+  font-family: "Century Gothic", Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-family: "Century Gothic", Helvetica, Arial, sans-serif;
+}
+
+    body {
+  min-height: 100vh;
+  font-family: "Century Gothic", Helvetica, Arial, sans-serif;
+
+  background-image: url("My_workbook/researchJournal/css/homepage_img_no_oscar.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+    /* close */
+    .back-link {
+      position: fixed;
+      top: 25px;
+      left: 25px;
+      color: black;
+      text-decoration: none;
+      font-size: 18px;
+      z-index: 20;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* content */
+    .project-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 35px;
+      text-align: center;
+      padding: 80px 40px 50px;
+    }
+
+    .project-page h1 {
+      font-size: 42px;
+    }
+
+    .project-page p {
+      max-width: 550px;
+      line-height: 1.5;
+    }
+
+    /*  three columns and three rows of image buttons */
+    .button-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 180px);
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+
+    
+    .modal-open-button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    /* image size */
+    .modal-open-button img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    /* hover */
+    .modal-open-button:hover img {
+      transform: scale(1.08);
+    }
+
+    /* blury */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      background-color: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* makes windows visible */
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    /* windows */
+    .modal-window {
+      position: relative;
+      width: min(700px, 90vw);
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 55px;
+      background-color: rgb(229, 229, 229);
+      border: 2px solid rgb(164, 164, 164);
+      text-align: justify;
+      animation: open-window 0.25s ease;
+    }
+
+    .modal-window h2 {
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+
+    .modal-window p {
+      margin-bottom: 20px;  
+      line-height: 1.5;
+    }
+    .modal-window p:last-of-type {
+     margin-bottom: 0;
+     
+     }
+
+    .modal-window img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 30px auto 0;
+    }
+
+    /* X button in the top-right of each window */
+    .close-button {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 36px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+/* arrows */
+.modal-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 45px;
+  cursor: pointer;
+  padding: 10px;
+  color: black;
+}
+
+.modal-arrow:hover {
+  transform: translateY(-50%) scale(1.15);
+}
+
+.left-arrow {
+  left: 12px;
+}
+
+.right-arrow {
+  right: 12px;
+}
+
+    @keyframes open-window {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Stacks the buttons on smaller screens */
+    @media (max-width: 700px) {
+  .button-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .button-ten {
+    grid-column: 1 / 3;
+  }
+}
+
+@media (max-width: 420px) {
+  .button-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .button-ten {
+    grid-column: 1;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- back to the homepage -->
+  <a class="back-link" href="index.html">← Home</a>
+
+  <main class="project-page">
+    <h1>CASE STUDIES & COURSE WORK</h1>
+    <p>Click an image to read more!</p>
+
+    <!-- image buttons: -->
+    <div class="button-grid">
+
+      <button class="modal-open-button" onclick="openModal('modal1')" aria-label="Open window one">
+        <img src="My_workbook/researchJournal/img/workbookB_pics/Case_Studies/Moog/Bob_Moog3.jpg" alt="Open window one">
+      </button>
+
+      <button class="modal-open-button" onclick="openModal('modal2')" aria-label="Open window two">
+        <img src="My_workbook/researchJournal/img/workbookB_pics/Case_Studies/Neil_Harbisson/Neil-Harbisson.jpeg" alt="Open window two">
+      </button>
+
+      <button class="modal-open-button" onclick="openModal('modal3')" aria-label="Open window three">
+        <img src="My_workbook/researchJournal/img/workbookB_pics/Case_Studies/Harold_Cohen/Harold.jpg" alt="Open window three">
+      </button>
+
+      <button class="modal-open-button" onclick="openModal('modal4')" aria-label="Open window four">
+        <img src="My_workbook/researchJournal/img/workbookB_pics/Case_Studies/Aaron_Koblin/AaronKoblin_TED.jpg" alt="Open window four">
+      </button>
+
+      <button class="modal-open-button" onclick="openModal('modal5')" aria-label="Open window five">
+        <img src="My_workbook/researchJournal/img/workbookB_pics/Workshops/p5_sp.png" alt="Open window five">
+      </button>
+
+      <button class="modal-open-button" onclick="openModal('modal6')" aria-label="Open window six">
+        <img src="My_workbook/researchJournal/img/workbookB_pics/Workshops/Labelling_Arduino.jpeg" alt="Open window six">
+      </button>
+
+      <button class="modal-open-button" onclick="openModal('modal7')" aria-label="Open window seven">
+        <img src="My_workbook/researchJournal/img/workbookB_pics/Workshops/lightturn_on.jpeg" alt="Open window seven">
+      </button>
+
+      <button class="modal-open-button" onclick="openModal('modal8')" aria-label="Open window eight">
+        <img src="My_workbook/researchJournal/img/workbookB_pics/Workshops/distance sensor.jpeg" alt="Open window eight">
+      </button>
+
+      <button class="modal-open-button" onclick="openModal('modal9')" aria-label="Open window nine">
+        <img src="My_workbook/researchJournal/img/workbookB_pics/Workshops/veg_instrument.jpeg" alt="Open window nine">
+      </button>
+
+      <button class="modal-open-button button-ten" onclick="openModal('modal10')" aria-label="Open window ten">
+       <img src="My_workbook/researchJournal/css/web_dev_button.png" alt="Open window ten">
+      </button>
+
+    </div>
+  </main>
+
+  <!-- The Moog -->
+  <div class="modal-overlay" id="modal1" onclick="closeModalOutside(event, 'modal1')">
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="title1">
+
+    <button class="close-button" onclick="closeModal('modal1')" aria-label="Close window">&times;</button>
+
+   <button class="modal-arrow left-arrow" onclick="changeModal(1, -1)" aria-label="Previous window">
+      &#10094;
+    </button>
+
+    <button class="modal-arrow right-arrow" onclick="changeModal(1, 1)" aria-label="Next window">
+      &#10095;
+    </button>
+    <H1>CASE STUDY</H1>
+      <h2 id="title1">Early Electronic Music - The Moog</h2>
+      <p> Developed in the early 1960s by American engineer Robert A. Moog, the Moog synthesiser is an analogue electronic musical instrument that revolutionised electronic music by introducing the voltage-controlled analog architecture that would lay the groundwork for modern-day synthesisers. The instrument produces sound through the manipulation of electronic currents, a process referred to as subtractive synthesis. This involves an initial harmonically rich raw wave that passes through amplifiers, modulators, and a uniquely warm filter to sculpt the final tone. This differs from the synthesisers of today, which are often digital or software-based. Instead of relying entirely on analogue circuitry, modern keyboards will generate or process sound through computer code.</p>
+      <p> I discovered the Moog when listening to ‘Here Comes the Sun’ by the Beatles. Despite listening to this song countless times, I had never noticed the subtle electronic melody in the last chorus and verse. Discovering this electronic riff changed my perception of the song and sparked my curiosity about what this interesting sound was.</p>
+      <p>The picture below shows Robert Moog posing with his Moog synthesiser in 1970.</p>
+      <img src="My_workbook/researchJournal/img/workbookB_pics/Case_Studies/Moog/Robert Moog.jpeg" >
+    </div>
+  </div>
+
+  <!-- Neil Harbisson -->
+  <div class="modal-overlay" id="modal2" onclick="closeModalOutside(event, 'modal2')">
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="title2">
+
+    <button class="close-button" onclick="closeModal('modal2')" aria-label="Close window">&times;</button>
+
+    <button class="modal-arrow left-arrow" onclick="changeModal(2, -1)" aria-label="Previous window">
+      &#10094;
+    </button>
+
+    <button class="modal-arrow right-arrow" onclick="changeModal(2, 1)" aria-label="Next window">
+      &#10095;
+    </button>
+    <H1>CASE STUDY</H1>
+      <h2 id="title2"> Neil Harbisson</h2>
+      <p>Neil Harbisson is a Catalan-raised, British-born contemporary artist and cyborg activist best known for having an antenna implanted in his skull and for being officially recognised as a cyborg by the government 3. Harbisson was born with achromatopsia, an extremely rare type of colourblindness that disallows any perception of colour, meaning he sees the world in complete black and white. This sparked the invention of his cybernetic antenna, which allows him to perceive colour via audible vibrations transmitted through his skull.</p>
+      <p>Harbisson identifies as a cyborg, saying in a 2012 TED Talk, “when I started to dream in colour… I felt the software and my brain had united… [this is] when I started to feel like a cyborg.” His cybernetic enhancements seem to be ongoing, as in September of 2020, he had a Bioluminescent tooth surgically fixed in his mouth, functioning as a torch.</p>
+      <p>Harbisson utilised his unique audio-based perception of colour to create artwork, depicting unexpected forms of media such as famous political speeches or pop songs in formatted compositions of colour, each tone or note represented by a corresponding colour.</p>
+      <p>The infographic below from Idea Visualised by TED demonstrates the pitch Harbisson's antenna transmits in accordance with different colours.</p>
+      <img src="My_workbook/researchJournal/img/workbookB_pics/Case_Studies/Neil_Harbisson/neil-harbisson-visualized.jpeg" >
+    </div>
+  </div>
+
+  <!-- Harold Cohen -->
+  <div class="modal-overlay" id="modal3" onclick="closeModalOutside(event, 'modal3')">
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="title3">
+
+    <button class="close-button" onclick="closeModal('modal3')" aria-label="Close window">&times;</button>
+
+    <button class="modal-arrow left-arrow" onclick="changeModal(3, -1)" aria-label="Previous window">
+      &#10094;
+    </button>
+
+    <button class="modal-arrow right-arrow" onclick="changeModal(3, 1)" aria-label="Next window">
+      &#10095;
+    </button>
+    <H1>CASE STUDY</H1>
+      <h2 id="title3">Harold Cohen</h2>
+      <p>Harold Cohen (1928–2016) was a British-born artist and computer programmer best known for creating AARON, one of the earliest and longest-running artificial intelligence systems developed specifically to produce artwork. Before working with computers, Cohen was a successful painter in his own right, as he had been exhibited internationally and had represented Great Britain at the Venice Biennale in 1966. Developed in the late 1960s and named in the early 1970s, the name ‘AARON’ alludes to the biblical figure anointed as speaker for his brother Moses, conjuring ideas of artistry being a form of communication with the divine.</p>
+      <p>Unlike contemporary image-generating AI models that respond to written prompts or photographs, AARON functions in response to a set of handwritten rules about lines, forms, space, figures, plants and colour. Cohen was, in many ways, acting as a teacher or mentor to this machine, attempting to teach AARON some form of autonomous decision-making via coding. Despite Cohen's passing in 2016, AARON lives on, continuing to appear in exhibitions around the world, showcasing the genius of Cohen’s artistic vision. AARON, imbued with the artistic style of its creator, carries Cohen's legacy as an extension of the artist's practice, a suite of creation now capable of immortality.</p>
+      <p>The image below shows Cohen working with AARON, at the Computer Museum in Boston in 1995.</p>
+      <img src="My_workbook/researchJournal/img/workbookB_pics/Case_Studies/Harold_Cohen/Harold_AARON.jpeg" >
+    </div>
+  </div>
+
+  <!-- Aaron Koblin -->
+  <div class="modal-overlay" id="modal4" onclick="closeModalOutside(event, 'modal4')">
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="title4">
+
+    <button class="close-button" onclick="closeModal('modal4')" aria-label="Close window">&times;</button>
+
+    <button class="modal-arrow left-arrow" onclick="changeModal(4, -1)" aria-label="Previous window">
+      &#10094;
+    </button>
+
+    <button class="modal-arrow right-arrow" onclick="changeModal(4, 1)" aria-label="Next window">
+      &#10095;
+    </button>
+    <H1>CASE STUDY</H1>
+      <h2 id="title4">Aaron Koblin</h2>
+      <p>Aaron Koblin is an American digital media artist and designer whose work explores the relationship between technology, data and collective human behaviour. Rather than using digital technology only as a tool for producing images, Koblin transforms large quantities of information into visually compelling artworks. His practice often uses real-world or community-generated data to reveal patterns that would otherwise remain unnoticed, showcasing technology's capacity for storytelling when translated into a digestible and meaningful visual outcome.</p>
+      <p>One of Koblin’s most well-known artworks is ‘Flight Patterns.’ This 2005 artwork depicts paths of air traffic over North America visualised in a striking array of colour and simulated light. Through the layering of thousands of flight paths, the work transforms ordinary air-travel information into a glowing, animated image that resembles a living network. Another artwork of Koblin’s, titled ‘The Sheep Market,’ asked online workers using Amazon Mechanical Turk (a crowdsourcing marketplace owned by Amazon) to draw a sheep facing left. Created in 2008, Koblin collected 10,000 drawings, revealing both the individuality of each participant and the strange, repetitive nature of online labour.</p>
+      <p>Both ‘Flight Patterns’ and ‘The Sheep Market’ are pictured below.</p>
+      <img src="My_workbook/researchJournal/img/workbookB_pics/Case_Studies/Aaron_Koblin/flight_patterns.jpg">
+      <img src="My_workbook/researchJournal/img/workbookB_pics/Case_Studies/Aaron_Koblin/the-sheep-market-hero.jpg">
+    </div>
+  </div>
+
+  <!-- P5 Self portrait -->
+  <div class="modal-overlay" id="modal5" onclick="closeModalOutside(event, 'modal5')">
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="title5">
+
+    <button class="close-button" onclick="closeModal('modal5')" aria-label="Close window">&times;</button>
+
+    <button class="modal-arrow left-arrow" onclick="changeModal(5, -1)" aria-label="Previous window">
+      &#10094;
+    </button>
+
+    <button class="modal-arrow right-arrow" onclick="changeModal(5, 1)" aria-label="Next window">
+      &#10095;
+    </button>
+      <h2 id="title5">P5.js Self-Portrait</h2>
+      <p>As homework, we were tasked with creating a self-portrait via p5.js. This was a fun introduction to creative coding that wasn’t overly complex. I started by drawing a simple draft self-portrait in Adobe Illustrator, so I could map the position of each shape I was using. Adobe Illustrator was also great for finding the colour values of my composition.</p>
+      <img src="My_workbook/researchJournal/img/workbookB_pics/Workshops/p5_sp.png" >
+    </div>
+  </div>
+
+  <!-- Labelling Arduino exercise -->
+  <div class="modal-overlay" id="modal6" onclick="closeModalOutside(event, 'modal6')">
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="title6">
+
+    <button class="close-button" onclick="closeModal('modal6')" aria-label="Close window">&times;</button>
+
+    <button class="modal-arrow left-arrow" onclick="changeModal(6, -1)" aria-label="Previous window">
+      &#10094;
+    </button>
+
+    <button class="modal-arrow right-arrow" onclick="changeModal(6, 1)" aria-label="Next window">
+      &#10095;
+    </button>
+      <h2 id="title6">Introduction to Arduino’s</h2>
+      <p>Upon being introduced to physical computing using Arduino kits, we were asked to label each component within the Arduino kit. The last time I had touched an Arduino was in year 8 (8 years ago), so I didn’t exactly feel confident in my knowledge of this area. It quickly became apparent that the names of these components, in some cases, are very specific. Who could have known that calling an LED (Light-Emitting Diode) a ‘light’ would be wrong? There were many components I had never seen before, such as a piezo buzzer, which I incorrectly thought was a microphone. This was a great starting point for building some foundational knowledge about Arduino and physical coding.</p>
+      <img src="My_workbook/researchJournal/img/workbookB_pics/Workshops/Labelling_Arduino.jpeg">
+    </div>
+  </div>
+
+  <!-- Introduction to Arduino, making a light turn on -->
+  <div class="modal-overlay" id="modal7" onclick="closeModalOutside(event, 'modal7')">
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="title7">
+
+    <button class="close-button" onclick="closeModal('modal7')" aria-label="Close window">&times;</button>
+
+    <button class="modal-arrow left-arrow" onclick="changeModal(7, -1)" aria-label="Previous window">
+      &#10094;
+    </button>
+
+    <button class="modal-arrow right-arrow" onclick="changeModal(7, 1)" aria-label="Next window">
+      &#10095;
+    </button>
+      <h2 id="title7">Let there be Light!</h2>
+      <p>Our first accomplishment in the realm of physical computing was using the Arduino to turn on an LED. This was very straightforward, as we were provided a Tinkercad diagram that outlined the circuit.</p>
+      <img src="My_workbook/researchJournal/img/workbookB_pics/Workshops/lightturn_on.jpeg">
+    </div>
+  </div>
+
+  <!-- Distance sensor -->
+  <div class="modal-overlay" id="modal8" onclick="closeModalOutside(event, 'modal8')">
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="title8">
+
+    <button class="close-button" onclick="closeModal('modal8')" aria-label="Close window">&times;</button>
+
+    <button class="modal-arrow left-arrow" onclick="changeModal(8, -1)" aria-label="Previous window">
+      &#10094;
+    </button>
+
+    <button class="modal-arrow right-arrow" onclick="changeModal(8, 1)" aria-label="Next window">
+      &#10095;
+    </button>
+      <h2 id="title8">IN MY HEADSPACE - Distance Sensor</h2>
+      <p>Stepping up in complexity and certainly entertainment value, our next in-class workshop involved creating distance sensors that would emit a high-pitched tone when within a certain proximity of an object. This exercise was done in partners, working with Margot, we first completed the circuit for the distance sensor. From the circuit diagram and code, we were able to successfully program the Arduino. We then mounted our creation on a paper shopping bag, functioning as a helmet. When worn upon one's head, our new invention was now capable of warning the user of walking too close to a surface or object. Truly a revolution in keeping people safe.</p>
+      <img src="My_workbook/researchJournal/img/workbookB_pics/Workshops/distance sensor.jpeg" alt="Project eight detail image">
+    </div>
+  </div>
+
+  <!-- Instrument -->
+  <div class="modal-overlay" id="modal9" onclick="closeModalOutside(event, 'modal9')">
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="title9">
+
+    <button class="close-button" onclick="closeModal('modal9')" aria-label="Close window">&times;</button>
+
+    <button class="modal-arrow left-arrow" onclick="changeModal(9, -1)" aria-label="Previous window">
+      &#10094;
+    </button>
+
+    <button class="modal-arrow right-arrow" onclick="changeModal(9, 1)" aria-label="Next window">
+      &#10095;
+    </button>
+      <h2 id="title9">Vegetable Instrument</h2>
+      <p>This was by far my favourite physical computing workshop. Creating our own instruments capable of producing three programmable, differing tones was lots of fun. The circuit contained three exposed wires, each of which would transmit a note to the speaker, all in accordance with the code communicated through the Arduino IDE program on our computers. My favourite aspect of this activity was experimenting with the coded value of each note, playing with differing combinations of sounds. Due to wires responding to anything conductive, we experimented with using a vegetable and even a sponge. At first, I didn’t understand how the sponge had any conductive value, but Karen and Andy explained to me how it was intertwined with a small weaving of metal, giving the sponge its conductivity. This was quite an inspiring exercise, as my love for music warmed me to the idea of physical computing.</p>
+      <img src="My_workbook/researchJournal/img/workbookB_pics/Workshops/veg_instrument.jpeg" alt="Project nine detail image">
+    </div>
+  </div>
+
+  <!-- web dev -->
+<div class="modal-overlay" id="modal10" onclick="closeModalOutside(event, 'modal10')">
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="title10">
+
+    <button class="close-button" onclick="closeModal('modal10')" aria-label="Close window">&times;</button>
+
+    <button class="modal-arrow left-arrow" onclick="changeModal(10, -1)" aria-label="Previous window">
+      &#10094;
+    </button>
+
+    <button class="modal-arrow right-arrow" onclick="changeModal(10, 1)" aria-label="Next window">
+      &#10095;
+    </button>
+
+    <h2 id="title10">Website Development</h2>
+    <p>Fitting all my Workbook B content on my website meant some rearranging was in order. To start with, I needed a new home page that could lead to both Workbook A and Workbook B. I decided to create a landing page with two buttons in the centre and a section of welcome text on a continuous-scroll wheel at the top of the screen.</p>
+    <p></p>
+    <img src="My_workbook/researchJournal/img/web_dev_b/Dev_2.png">
+    <p></p>
+    <p>Next was deciding how to integrate my content into a specific Workbook B page. In accordance with Karen and Andy’s feedback from Workbook A, stipulating the Word doc vibe of my page, I decided to lean more into the pop-up window approach. I figured this would make my website feel more professional and easily navigable, as all of my content would be available on one page via pop-up windows. This photo button gallery arrangement was fairly straightforward to code. What was new and interesting to learn was JavaScript. This allowed me to include more dynamic animations for opening and closing windows, as well as closing ‘x’ and left and right arrows to swap between content windows with ease. Upon finalising this gallery layout, I returned to my Workbook A pages and formatted them in the same way.</p>
+    <p></p>
+    <img src="My_workbook/researchJournal/img/web_dev_b/Dev_3.png">
+     <p></p>
+    <p>Once my website felt functional and easy to use, imbuing my personality felt like the next step. I screenshotted my white home page, and in Photoshop drew myself with extended arms pointing to the workbook buttons. This instantly made my website feel like it was mine, less bland and an extension of me (and my arms). I applied this open grassy landscape to the other workbook pages, harmonising my page into a more cohesive collection of content.</p>
+     <p></p>
+    <img src="My_workbook/researchJournal/img/web_dev_b/Dev_4.png">
+    <img src="My_workbook/researchJournal/img/web_dev_b/Dev_5.png">
+    <img src="My_workbook/researchJournal/img/web_dev_b/Dev_6.png">
+     <p></p>
+    <p>In refining my page, I made some minor adjustments, making the workbook buttons and scrolling text banner transparent. Lastly, I added a fun eater egg. When you click my face on the landing page, ‘Here Comes the Sun’ by The Beatles plays. Yay!</p>
+      <p></p>
+      <img src="My_workbook/researchJournal/img/web_dev_b/Dev_7.png">
+        <p></p>
+
+
+
+  </div>
+ </div>
+
+  <script>
+  const totalModals = 10;
+
+  function openModal(modalId) {
+    document.getElementById(modalId).classList.add("active");
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove("active");
+  }
+
+  function closeModalOutside(event, modalId) {
+    if (event.target === document.getElementById(modalId)) {
+      closeModal(modalId);
+    }
+  }
+
+  function changeModal(currentNumber, direction) {
+    closeModal("modal" + currentNumber);
+
+    let nextNumber = currentNumber + direction;
+
+    if (nextNumber < 1) {
+      nextNumber = totalModals;
+    }
+
+    if (nextNumber > totalModals) {
+      nextNumber = 1;
+    }
+
+    openModal("modal" + nextNumber);
+  }
+
+  document.addEventListener("keydown", function(event) {
+    const activeModal = document.querySelector(".modal-overlay.active");
+
+    if (!activeModal) {
+      return;
+    }
+
+    const currentNumber = Number(activeModal.id.replace("modal", ""));
+
+    if (event.key === "Escape") {
+      activeModal.classList.remove("active");
+    }
+
+    if (event.key === "ArrowLeft") {
+      changeModal(currentNumber, -1);
+    }
+
+    if (event.key === "ArrowRight") {
+      changeModal(currentNumber, 1);
+    }
+  });
+</script>
+
+</body>
+</html>
